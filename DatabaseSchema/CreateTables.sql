@@ -2,6 +2,7 @@
  Vorsicht: SQLite Datentypen sind beschränkt auf:
  https://sqlite.org/stricttables.html*/
 
+/*Tabellen erstellen (Ohne Fremdschlüsse)*/
 CREATE TABLE IF NOT EXISTS ITEM (
     itemId TEXT PRIMARY KEY,
     name TEXT,
@@ -15,4 +16,5 @@ CREATE TABLE IF NOT EXISTS STOLOC (
     pickSequence INTEGER
 ) STRICT;
 
+/*Fremdschlüssel hinzufügen*/
 ALTER TABLE ITEM ADD COLUMN pickingStoLoc TEXT REFERENCES STOLOC(stoLocId);
