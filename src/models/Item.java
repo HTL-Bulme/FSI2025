@@ -1,18 +1,18 @@
 package models;
 
-
 public class Item {
+
     private String itemId;
     private String name;
     private long itemLength;
     private long itemWidth;
     private long itemHeight;
+    private String pickingStoLoc;
 
-    public Item(String itemId)
-    {
+    public Item(String itemId) {
         this.itemId = itemId;
     }
-    
+
     public String getItemId() {
         return itemId;
     }
@@ -51,9 +51,21 @@ public class Item {
 
     @Override
     public String toString() {
-        return this.itemId + " - " + this.name;
+        return this.itemId + " - " + this.name + " StoLoc: " + this.getPickingStoLoc();
     }
-    
-    
-}
 
+    /**
+     * @return the pickingStoLoc
+     */
+    public String getPickingStoLoc() {
+        return pickingStoLoc;
+    }
+
+    /**
+     * @param pickingStoLoc the pickingStoLoc to set
+     */
+    public void setPickingStoLoc(String pickingStoLoc) {
+        this.pickingStoLoc = pickingStoLoc;
+    }
+
+}

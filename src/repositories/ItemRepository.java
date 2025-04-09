@@ -12,14 +12,12 @@ import java.util.List;
 
 public class ItemRepository {
 
-    final static String URL = "jdbc:sqlite:ssi.db";
-
     public List<Item> getAll() {
         String sql = "SELECT * FROM ITEM order by itemId ASC;";
         //1. Verbindung aufbauen
         ArrayList<Item> items = new ArrayList<>();
 
-        try (Connection conn = DriverManager.getConnection(URL); //2. "Select * from Item" ausführen
+        try (Connection conn = DriverManager.getConnection(Config.URL); //2. "Select * from Item" ausführen
                  Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
 
             //3. Resultat in Objekte der Klasse Item umwandeln
@@ -30,6 +28,7 @@ public class ItemRepository {
                 myItem.setItemLength(rs.getInt("itemLength"));
                 myItem.setItemWidth(rs.getInt("itemWidth"));
                 myItem.setItemHeight(rs.getInt("itemHeight"));
+                myItem.setPickingStoLoc(rs.getString("pickingStoLoc"));
 
                 items.add(myItem);
             }
@@ -46,7 +45,7 @@ public class ItemRepository {
         String sql = "SELECT * FROM ITEM WHERE itemId = ?;";
         //1. Verbindung aufbauen
 
-        try (Connection conn = DriverManager.getConnection(URL); //2. "Select * from Item" ausführen
+        try (Connection conn = DriverManager.getConnection(Config.URL); //2. "Select * from Item" ausführen
                  PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setString(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -58,6 +57,7 @@ public class ItemRepository {
                 myItem.setItemLength(rs.getInt("itemLength"));
                 myItem.setItemWidth(rs.getInt("itemWidth"));
                 myItem.setItemHeight(rs.getInt("itemHeight"));
+                myItem.setPickingStoLoc(rs.getString("pickingStoLoc"));
 
                 return myItem;
             }
@@ -71,15 +71,16 @@ public class ItemRepository {
     }
 
     public void addToDatabase(Item item) {
-        String sql = "INSERT INTO ITEM(itemId, name, itemLength, itemWidth, itemHeight) VALUES(?,?,?,?,?);";
+        String sql = "INSERT INTO ITEM(itemId, name, itemLength, itemWidth, itemHeight, pickingStoLoc) VALUES(?,?,?,?,?,?);";
 
-        try (Connection conn = DriverManager.getConnection(URL); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DriverManager.getConnection(Config.URL); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, item.getItemId());
             pstmt.setString(2, item.getName());
             pstmt.setLong(3, item.getItemLength());
             pstmt.setLong(4, item.getItemWidth());
             pstmt.setLong(5, item.getItemHeight());
+            pstmt.setString(6, item.getPickingStoLoc());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -88,14 +89,15 @@ public class ItemRepository {
     }
 
     public void updateInDatabase(Item item) {
-        String sql = "UPDATE ITEM SET name = ?, itemLength = ?, itemWidth = ?, itemHeight = ? where itemId = ?;";
-        try (Connection conn = DriverManager.getConnection(URL); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            
+        String sql = "UPDATE ITEM SET name = ?, itemLength = ?, itemWidth = ?, itemHeight = ?, pickingStoLoc = ? where itemId = ?;";
+        try (Connection conn = DriverManager.getConnection(Config.URL); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
             pstmt.setString(1, item.getName());
             pstmt.setLong(2, item.getItemLength());
             pstmt.setLong(3, item.getItemWidth());
             pstmt.setLong(4, item.getItemHeight());
-            pstmt.setString(5, item.getItemId());
+            pstmt.setString(5, item.getPickingStoLoc());
+            pstmt.setString(6, item.getItemId());
 
             pstmt.executeUpdate();
 

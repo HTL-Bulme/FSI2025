@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import models.Item;
+import models.Stoloc;
 import repositories.ItemRepository;
+import repositories.StolocRepository;
 
 public class DemoApp extends javax.swing.JFrame {
 
@@ -30,7 +32,7 @@ public class DemoApp extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Antenna");
 
-        BtnItemRepo.setText("Test Item Repository");
+        BtnItemRepo.setText("Generate Stolocs and Items (For Testing)");
         BtnItemRepo.setToolTipText("");
         BtnItemRepo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -44,15 +46,15 @@ public class DemoApp extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(BtnItemRepo, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(313, Short.MAX_VALUE))
+                .addComponent(BtnItemRepo, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(BtnItemRepo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addComponent(BtnItemRepo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(243, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -77,7 +79,17 @@ public class DemoApp extends javax.swing.JFrame {
 
     private void BtnItemRepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnItemRepoActionPerformed
         //Repo erzeugen
-        ItemRepository repo = new ItemRepository();
+        StolocRepository stolocRepo = new StolocRepository();
+        Stoloc stoloc1 = new Stoloc("ABC_123");
+        stoloc1.setPickSequence(1);
+        
+        Stoloc stoloc2 = new Stoloc("DEF_456");
+        stoloc2.setPickSequence(2);
+        
+        stolocRepo.addToDatabase(stoloc1);
+        stolocRepo.addToDatabase(stoloc2);
+        
+        ItemRepository itemRepo = new ItemRepository();
         
         //2 neue erstellen
         Item myNewItem = new Item("ID001");
@@ -85,22 +97,24 @@ public class DemoApp extends javax.swing.JFrame {
         myNewItem.setItemLength(100);
         myNewItem.setItemWidth(50);
         myNewItem.setItemHeight(200);
-        repo.addToDatabase(myNewItem);
+        myNewItem.setPickingStoLoc(stoloc1.getStoLocId());
+        itemRepo.addToDatabase(myNewItem);
         
         Item myNewItem2 = new Item("ID002");
         myNewItem2.setName("Levis Jeans");
         myNewItem2.setItemLength(500);
         myNewItem2.setItemWidth(120);
         myNewItem2.setItemHeight(300);
-        repo.addToDatabase(myNewItem2);
+        myNewItem2.setPickingStoLoc(stoloc2.getStoLocId());
+        itemRepo.addToDatabase(myNewItem2);
         
         //Suchen und verändern
-        Item gefundenesItem = repo.getById("ID002");
+        Item gefundenesItem = itemRepo.getById("ID002");
         gefundenesItem.setItemHeight(gefundenesItem.getItemHeight() + 10);
-        repo.updateInDatabase(gefundenesItem);
+        itemRepo.updateInDatabase(gefundenesItem);
         
         //Alle aus DB holen
-        List<Item> alleItems = repo.getAll();
+        List<Item> alleItems = itemRepo.getAll();
         
         String outputString = "";
         for (Item item : alleItems) {

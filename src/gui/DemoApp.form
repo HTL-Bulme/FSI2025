@@ -70,8 +70,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="BtnItemRepo" min="-2" pref="172" max="-2" attributes="0"/>
-                  <EmptySpace pref="313" max="32767" attributes="0"/>
+                  <Component id="BtnItemRepo" min="-2" pref="381" max="-2" attributes="0"/>
+                  <EmptySpace pref="104" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -79,8 +79,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="BtnItemRepo" min="-2" pref="43" max="-2" attributes="0"/>
-                  <EmptySpace pref="255" max="32767" attributes="0"/>
+                  <Component id="BtnItemRepo" min="-2" pref="55" max="-2" attributes="0"/>
+                  <EmptySpace pref="243" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -88,7 +88,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="BtnItemRepo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Test Item Repository"/>
+            <Property name="text" type="java.lang.String" value="Generate Stolocs and Items (For Testing)"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <Events>
