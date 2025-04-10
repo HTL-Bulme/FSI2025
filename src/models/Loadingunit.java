@@ -11,6 +11,7 @@ package models;
 public class Loadingunit {
     
     private String luId;
+    private String stoLocId;
     private String luType;
     
     public Loadingunit(String luId) {
@@ -25,12 +26,31 @@ public class Loadingunit {
         return luType;
     }
     
+    public String getstoLocId() {
+        return getStoLocId();
+    }
+    
     public void setLuType(String luType) {
         this.luType = luType;
+        
     }
     
     @Override
     public String toString() {
         return "Loadingunit: " + this.luId + " - " ;
+    }
+
+    /**
+     * @return the stoLocId
+     */
+    public String getStoLocId() {
+        return stoLocId;
+    }
+
+    /**
+     * @param stoLocId the stoLocId to set
+     */
+    public void setStoLocId(String stoLocId) {
+        this.stoLocId = stoLocId;
     }
 }
