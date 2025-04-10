@@ -5,6 +5,7 @@
 package models;
 
 import java.time.LocalDateTime;
+import java.sql.Date;
 
 /**
  *
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
  */
 public class Perftrack {
     private long perTRackId;
-    private LocalDateTime trackTime;
+    private Date trackTime;
     private long pickOrderId;
     private String userId;
     private long pickcount;
@@ -39,14 +40,14 @@ public class Perftrack {
     /**
      * @return the trackTime
      */
-    public LocalDateTime getTrackTime() {
+    public Date getTrackTime() {
         return trackTime;
     }
 
     /**
      * @param trackTime the trackTime to set
      */
-    public void setTrackTime(LocalDateTime trackTime) {
+    public void setTrackTime(Date trackTime) {
         this.trackTime = trackTime;
     }
 
