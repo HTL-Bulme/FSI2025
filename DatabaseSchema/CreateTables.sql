@@ -11,9 +11,9 @@ CREATE TABLE IF NOT EXISTS CUSTOMER (
 CREATE TABLE IF NOT EXISTS ITEM (
     itemId CHAR(12) PRIMARY KEY,
     name CHAR(40),
-    'length' INTEGER,
-    width INTEGER,
-    height INTEGER,
+    itemLength INTEGER,
+    itemWidth INTEGER,
+    itemHeight INTEGER,
     pickingStoLoc CHAR(18),
     FOREIGN KEY (pickingStoLoc) REFERENCES STOLOC(stoLocId)
 );
