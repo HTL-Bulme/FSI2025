@@ -224,6 +224,7 @@ public class ItemCreate extends javax.swing.JFrame {
 
     // Beispiel: Ausgabe zur Kontrolle
     System.out.println("Item erstellt:");
+    System.out.println(item);
 
     // Fenster schließen
     this.dispose();
