@@ -12,6 +12,10 @@ public class User {
     private String userId;
     private String userName;
 
+    public User(String userId) {
+        this.userId = userId;
+    }
+
     /**
      * @return the userName
      */
@@ -39,5 +43,6 @@ public class User {
     public void setUserId(String userId) {
         this.userId = userId;
     }
-  
+
+    
 }
