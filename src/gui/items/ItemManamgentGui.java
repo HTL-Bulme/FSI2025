@@ -26,21 +26,95 @@ public class ItemManamgentGui extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Btn_create = new javax.swing.JButton();
+        Btn_change = new javax.swing.JButton();
+        Btn_delete = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        Btn_create.setText("Erstellen");
+        Btn_create.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_createActionPerformed(evt);
+            }
+        });
+
+        Btn_change.setText("Ändern");
+        Btn_change.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_changeActionPerformed(evt);
+            }
+        });
+
+        Btn_delete.setText("Löschen");
+        Btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_deleteActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(Btn_create)
+                .addGap(27, 27, 27)
+                .addComponent(Btn_change)
+                .addGap(26, 26, 26)
+                .addComponent(Btn_delete)
+                .addContainerGap(83, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 409, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Btn_create)
+                    .addComponent(Btn_change)
+                    .addComponent(Btn_delete))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Btn_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_createActionPerformed
+        //Neues Fenster öffnen
+        
+        ItemCreate newForm = new ItemCreate();
+        newForm.setVisible(true);
+        
+    }//GEN-LAST:event_Btn_createActionPerformed
+
+    private void Btn_changeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_changeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_changeActionPerformed
+
+    private void Btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_deleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_deleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +152,10 @@ public class ItemManamgentGui extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Btn_change;
+    private javax.swing.JButton Btn_create;
+    private javax.swing.JButton Btn_delete;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
