@@ -29,6 +29,7 @@ public class DemoApp extends javax.swing.JFrame {
         BtnItemRepo = new javax.swing.JButton();
         BtnItemManagement = new javax.swing.JButton();
         BtnOutboundOrderMgmt = new javax.swing.JButton();
+        BtnGeneralMgmt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Antenna");
@@ -55,21 +56,28 @@ public class DemoApp extends javax.swing.JFrame {
             }
         });
 
+        BtnGeneralMgmt.setText("General Data Management");
+        BtnGeneralMgmt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGeneralMgmtActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(BtnItemRepo, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
                         .addComponent(BtnItemManagement)
-                        .addGap(18, 18, 18)
-                        .addComponent(BtnOutboundOrderMgmt)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnOutboundOrderMgmt)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnGeneralMgmt, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnItemRepo, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,7 +87,8 @@ public class DemoApp extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnItemManagement)
-                    .addComponent(BtnOutboundOrderMgmt))
+                    .addComponent(BtnOutboundOrderMgmt)
+                    .addComponent(BtnGeneralMgmt))
                 .addContainerGap(132, Short.MAX_VALUE))
         );
 
@@ -108,15 +117,15 @@ public class DemoApp extends javax.swing.JFrame {
         StolocRepository stolocRepo = new StolocRepository();
         Stoloc stoloc1 = new Stoloc("ABC_123");
         stoloc1.setPickSequence(1);
-        
+
         Stoloc stoloc2 = new Stoloc("DEF_456");
         stoloc2.setPickSequence(2);
-        
+
         stolocRepo.addToDatabase(stoloc1);
         stolocRepo.addToDatabase(stoloc2);
-        
+
         ItemRepository itemRepo = new ItemRepository();
-        
+
         //2 neue erstellen
         Item myNewItem = new Item("ID001");
         myNewItem.setName("Nike Air");
@@ -125,7 +134,7 @@ public class DemoApp extends javax.swing.JFrame {
         myNewItem.setItemHeight(200);
         myNewItem.setPickingStoLoc(stoloc1.getStoLocId());
         itemRepo.addToDatabase(myNewItem);
-        
+
         Item myNewItem2 = new Item("ID002");
         myNewItem2.setName("Levis Jeans");
         myNewItem2.setItemLength(500);
@@ -133,20 +142,20 @@ public class DemoApp extends javax.swing.JFrame {
         myNewItem2.setItemHeight(300);
         myNewItem2.setPickingStoLoc(stoloc2.getStoLocId());
         itemRepo.addToDatabase(myNewItem2);
-        
+
         //Suchen und verändern
         Item gefundenesItem = itemRepo.getById("ID002");
         gefundenesItem.setItemHeight(gefundenesItem.getItemHeight() + 10);
         itemRepo.updateInDatabase(gefundenesItem);
-        
+
         //Alle aus DB holen
         List<Item> alleItems = itemRepo.getAll();
-        
+
         String outputString = "";
         for (Item item : alleItems) {
             outputString += item.toString() + "\n";
         }
-        
+
         JOptionPane.showMessageDialog(this, outputString);
 
     }//GEN-LAST:event_BtnItemRepoActionPerformed
@@ -155,7 +164,7 @@ public class DemoApp extends javax.swing.JFrame {
         // TODO add your handling code here:
         ItemManamgentGui newForm = new ItemManamgentGui();
         newForm.setVisible(true);
-        
+
     }//GEN-LAST:event_BtnItemManagementActionPerformed
 
     private void BtnOutboundOrderMgmtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOutboundOrderMgmtActionPerformed
@@ -163,6 +172,12 @@ public class DemoApp extends javax.swing.JFrame {
         OutboundOrderManagementGui newForm = new OutboundOrderManagementGui();
         newForm.setVisible(true);
     }//GEN-LAST:event_BtnOutboundOrderMgmtActionPerformed
+
+    private void BtnGeneralMgmtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGeneralMgmtActionPerformed
+        // TODO add your handling code here:
+        GeneralManagementGui newForm = new GeneralManagementGui();
+        newForm.setVisible(true);
+    }//GEN-LAST:event_BtnGeneralMgmtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,6 +217,7 @@ public class DemoApp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnGeneralMgmt;
     private javax.swing.JButton BtnItemManagement;
     private javax.swing.JButton BtnItemRepo;
     private javax.swing.JButton BtnOutboundOrderMgmt;

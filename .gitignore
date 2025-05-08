@@ -23,3 +23,5 @@
 hs_err_pid*
 replay_pid*
 ssi.db
+private.properties
+nbproject/private/private.properties
