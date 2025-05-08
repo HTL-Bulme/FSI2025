@@ -2,14 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/estymate/Documents/GitHub/FSI2025/src/gui/DemoApp.java</file>
-            <file>file:/C:/Users/estymate/Documents/GitHub/FSI2025/src/repositories/StolocRepository.java</file>
-            <file>file:/C:/Users/estymate/Documents/GitHub/FSI2025/DatabaseSchema/CreateTables.sql</file>
-            <file>file:/C:/Users/estymate/Documents/GitHub/FSI2025/src/repositories/Config.java</file>
-            <file>file:/C:/Users/estymate/Documents/GitHub/FSI2025/src/models/Item.java</file>
-            <file>file:/C:/Users/estymate/Documents/GitHub/FSI2025/src/repositories/ItemRepository.java</file>
-            <file>file:/C:/Users/estymate/Documents/GitHub/FSI2025/src/models/Stoloc.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

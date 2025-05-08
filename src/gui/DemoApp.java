@@ -1,6 +1,7 @@
 package gui;
 
 import gui.items.ItemManamgentGui;
+import gui.loadingunit.LoadingUnitGui;
 import java.util.List;
 import javax.swing.JOptionPane;
 import models.Item;
@@ -30,6 +31,7 @@ public class DemoApp extends javax.swing.JFrame {
         BtnItemManagement = new javax.swing.JButton();
         BtnOutboundOrderMgmt = new javax.swing.JButton();
         BtnGeneralMgmt = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Antenna");
@@ -63,6 +65,13 @@ public class DemoApp extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Loading Units");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -76,7 +85,8 @@ public class DemoApp extends javax.swing.JFrame {
                         .addComponent(BtnOutboundOrderMgmt)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnGeneralMgmt, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(BtnItemRepo, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnItemRepo, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -89,7 +99,9 @@ public class DemoApp extends javax.swing.JFrame {
                     .addComponent(BtnItemManagement)
                     .addComponent(BtnOutboundOrderMgmt)
                     .addComponent(BtnGeneralMgmt))
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -179,6 +191,11 @@ public class DemoApp extends javax.swing.JFrame {
         newForm.setVisible(true);
     }//GEN-LAST:event_BtnGeneralMgmtActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        LoadingUnitGui newForm = new LoadingUnitGui();
+        newForm.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -221,6 +238,7 @@ public class DemoApp extends javax.swing.JFrame {
     private javax.swing.JButton BtnItemManagement;
     private javax.swing.JButton BtnItemRepo;
     private javax.swing.JButton BtnOutboundOrderMgmt;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
