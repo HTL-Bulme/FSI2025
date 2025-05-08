@@ -68,20 +68,19 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                          <Component id="BtnItemRepo" min="-2" pref="381" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                           <Component id="BtnItemManagement" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="BtnOutboundOrderMgmt" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="BtnGeneralMgmt" min="-2" pref="185" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="BtnItemRepo" min="-2" pref="381" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="69" max="32767" attributes="0"/>
+                  <EmptySpace pref="59" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -94,6 +93,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="BtnItemManagement" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="BtnOutboundOrderMgmt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BtnGeneralMgmt" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="132" max="32767" attributes="0"/>
               </Group>
@@ -124,6 +124,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnOutboundOrderMgmtActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="BtnGeneralMgmt">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="General Data Management"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnGeneralMgmtActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
