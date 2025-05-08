@@ -63,11 +63,11 @@ public class LoadinguntisRepositor {
     }
     
     public void addToDatabase(Loadingunit loadingunit) {
-        String sql = "INSERT INTO ITEM(getluId, getstoLocId, getluType) VALUES(?,?,?);";
+        String sql = "INSERT INTO LOADINGUNIT(luId, stoLocId, luType) VALUES(?,?,?);";
 
         try (Connection conn = DriverManager.getConnection(Config.URL); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, loadingunit.getluId());
+            pstmt.setString(1, loadingunit.getLuId());
             pstmt.setString(2, loadingunit.getstoLocId());
             pstmt.setString(3, loadingunit.getluType());
 

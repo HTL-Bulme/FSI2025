@@ -18,7 +18,7 @@ public class Loadingunit {
         this.luId = luId;
     }
     
-    public String getLoadingunit() {
+    public String getLuId() {
         return luId;
     }
     
@@ -27,7 +27,7 @@ public class Loadingunit {
     }
     
     public String getstoLocId() {
-        return getStoLocId();
+        return stoLocId;
     }
     
     public void setLuType(String luType) {
