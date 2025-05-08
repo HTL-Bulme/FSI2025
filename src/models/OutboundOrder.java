@@ -4,20 +4,21 @@
  */
 package models;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /**
  *
  * @author aslan
  */
-public class OutBoundBorder {
+public class OutboundOrder {
     private String orderId; 
     private long pickingOrder; 
     private String state;
     private String customerId; 
-    private LocalDateTime deliveryTime; 
+    private Timestamp deliveryTime; 
     
-    public OutBoundBorder(String orderId) {
+    public OutboundOrder(String orderId) {
         this.orderId = orderId;
     }
 
@@ -73,14 +74,14 @@ public class OutBoundBorder {
     /**
      * @return the deliveryTime
      */
-    public LocalDateTime getDeliveryTime() {
+    public Timestamp getDeliveryTime() {
         return deliveryTime;
     }
 
     /**
      * @param deliveryTime the deliveryTime to set
      */
-    public void setDeliveryTime(LocalDateTime deliveryTime) {
+    public void setDeliveryTime(Timestamp deliveryTime) {
         this.deliveryTime = deliveryTime;
     }
     
