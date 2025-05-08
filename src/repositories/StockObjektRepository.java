@@ -49,7 +49,7 @@ public class StockObjektRepository {
         return items;
     }
 
-    public Item getById(String id1,String id2) {
+    public StockObjekt getById(String id1,String id2) {
 
         String sql = "SELECT * FROM STOCKOBJEKT WHERE luld = ? and stockObjektNumber = ?;";
         //1. Verbindung aufbauen

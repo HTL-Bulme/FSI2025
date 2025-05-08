@@ -28,7 +28,7 @@ public class PerftrackRepository {
             //3. Resultat in Objekte der Klasse Item umwandeln
             while (rs.next()) {
                 Perftrack myPerftrack = new Perftrack(rs.getInt("perfTrackId"));
-                myPerftrack.setTrackTime(rs.getInt("trackTime"));
+                myPerftrack.setTrackTime(rs.getDate("trackTime"));
                 myPerftrack.setPickOrderId(rs.getInt("pickOrderId"));
             }
         } catch (SQLException e) {
@@ -36,7 +36,7 @@ public class PerftrackRepository {
         }
 
         //4. Verbindung schließen
-        return items;
+        return Perftracklist;
     }
 
     public Item getById(String id) {
