@@ -113,7 +113,8 @@ public class ItemManamgentGui extends javax.swing.JFrame {
     }//GEN-LAST:event_Btn_changeActionPerformed
 
     private void Btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_deleteActionPerformed
-        // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_Btn_deleteActionPerformed
 
     /**
