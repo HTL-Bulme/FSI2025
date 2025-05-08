@@ -1,5 +1,6 @@
 package gui;
 
+import gui.items.ItemManamgentGui;
 import java.util.List;
 import javax.swing.JOptionPane;
 import models.Item;
