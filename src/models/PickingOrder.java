@@ -1,7 +1,7 @@
 package models;
 
-import java.time.LocalDateTime;
-
+import java.sql.Timestamp;
+        
 public class PickingOrder {
 
   private long pickingOrderId;
@@ -11,11 +11,11 @@ public class PickingOrder {
       KOMM,
       FERTIG
   }
-  private LocalDateTime startTime;
-  private LocalDateTime finishTime;
+  private Timestamp startTime;
+  private Timestamp finishTime;
   private String currentUser;
   private String customerId;
-  private LocalDateTime deliveryTime;
+  private Timestamp deliveryTime;
 
     /**
      * @return the pickingOrderId
@@ -34,28 +34,28 @@ public class PickingOrder {
     /**
      * @return the startTime
      */
-    public LocalDateTime getStartTime() {
+    public Timestamp getStartTime() {
         return startTime;
     }
 
     /**
      * @param startTime the startTime to set
      */
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
     }
 
     /**
      * @return the finishTime
      */
-    public LocalDateTime getFinishTime() {
+    public Timestamp getFinishTime() {
         return finishTime;
     }
 
     /**
      * @param finishTime the finishTime to set
      */
-    public void setFinishTime(LocalDateTime finishTime) {
+    public void setFinishTime(Timestamp finishTime) {
         this.finishTime = finishTime;
     }
 
@@ -90,14 +90,14 @@ public class PickingOrder {
     /**
      * @return the deliveryTime
      */
-    public LocalDateTime getDeliveryTime() {
+    public Timestamp getDeliveryTime() {
         return deliveryTime;
     }
 
     /**
      * @param deliveryTime the deliveryTime to set
      */
-    public void setDeliveryTime(LocalDateTime deliveryTime) {
+    public void setDeliveryTime(Timestamp deliveryTime) {
         this.deliveryTime = deliveryTime;
     }
 }
