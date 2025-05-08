@@ -26,6 +26,8 @@ public class DemoApp extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         BtnItemRepo = new javax.swing.JButton();
+        BtnItemManagement = new javax.swing.JButton();
+        BtnOutboundOrderMgmt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Antenna");
@@ -38,13 +40,34 @@ public class DemoApp extends javax.swing.JFrame {
             }
         });
 
+        BtnItemManagement.setText("Items");
+        BtnItemManagement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnItemManagementActionPerformed(evt);
+            }
+        });
+
+        BtnOutboundOrderMgmt.setText("Outbound Orders");
+        BtnOutboundOrderMgmt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnOutboundOrderMgmtActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(BtnItemRepo, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(BtnItemRepo, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(BtnItemManagement)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnOutboundOrderMgmt)))
                 .addContainerGap(69, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -52,7 +75,11 @@ public class DemoApp extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(BtnItemRepo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addGap(48, 48, 48)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnItemManagement)
+                    .addComponent(BtnOutboundOrderMgmt))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -123,6 +150,19 @@ public class DemoApp extends javax.swing.JFrame {
 
     }//GEN-LAST:event_BtnItemRepoActionPerformed
 
+    private void BtnItemManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnItemManagementActionPerformed
+        // TODO add your handling code here:
+        ItemManamgentGui newForm = new ItemManamgentGui();
+        newForm.setVisible(true);
+        
+    }//GEN-LAST:event_BtnItemManagementActionPerformed
+
+    private void BtnOutboundOrderMgmtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOutboundOrderMgmtActionPerformed
+        // TODO add your handling code here:
+        OutboundOrderManagementGui newForm = new OutboundOrderManagementGui();
+        newForm.setVisible(true);
+    }//GEN-LAST:event_BtnOutboundOrderMgmtActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -161,7 +201,9 @@ public class DemoApp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnItemManagement;
     private javax.swing.JButton BtnItemRepo;
+    private javax.swing.JButton BtnOutboundOrderMgmt;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
