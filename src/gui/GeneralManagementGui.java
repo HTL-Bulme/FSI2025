@@ -6,8 +6,14 @@ package gui;
 
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import models.Customer;
+import models.Perftrack;
 import models.Stoloc;
+import models.User;
+import repositories.PerftrackRepository;
+import repositories.CustomerRepository;
 import repositories.StolocRepository;
+import repositories.UserRepository;
 
 /**
  *
@@ -24,15 +30,55 @@ public class GeneralManagementGui extends javax.swing.JFrame {
         StolocRepository repo = new StolocRepository();
         List<Stoloc> allObjs = repo.getAll();
 
+        CustomerRepository custRepo = new CustomerRepository();
+        List<Customer> allCustomers = custRepo.getAll();
+
+        UserRepository userRepo = new UserRepository();
+        List<User> allUsers = userRepo.getAll();
+
+        PerftrackRepository perfRepo = new PerftrackRepository();
+        List<Perftrack> allPerfTracks = perfRepo.getAll();
+
+        SetUpStoLocTable(allObjs);
+        SetUpCustomerTable(allCustomers);
+        SetUpUserTable(allUsers);
+        SetUpPerfTrackTable(allPerfTracks);
+    }
+
+    private void SetUpStoLocTable(List<Stoloc> allObjs) {
         String[] columnNames = {"stoLocId", "pickSequence"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-
         for (Stoloc s : allObjs) {
             model.addRow(new Object[]{s.getStoLocId(), s.getPickSequence()});
         }
-        
         StoLocTable.setModel(model);
+    }
 
+    private void SetUpCustomerTable(List<Customer> allObjs) {
+        String[] columnNames = {"customerId", "allowedLuType"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        for (Customer c : allObjs) {
+            model.addRow(new Object[]{c.getCustomerId(), c.getAllowedLuType()});
+        }
+        CustomerTable.setModel(model);
+    }
+
+    private void SetUpUserTable(List<User> allObjs) {
+        String[] columnNames = {"userId", "name"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        for (User u : allObjs) {
+            model.addRow(new Object[]{u.getUserId(), u.getUserName()});
+        }
+        UserTable.setModel(model);
+    }
+
+    private void SetUpPerfTrackTable(List<Perftrack> allObjs) {
+        String[] columnNames = {"perfTrackId", "trackTime", "pickOrderId", "userId", "pickCount", "duration"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        for (Perftrack p : allObjs) {
+            model.addRow(new Object[]{p.getPerTRackId(), p.getTrackTime(), p.getPickOrderId(), p.getUserId(), p.getPickcount(), p.getDuration()});
+        }
+        PerftrackTable.setModel(model);
     }
 
     /**
@@ -46,8 +92,18 @@ public class GeneralManagementGui extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         StoLocTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        PerftrackTable = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        CustomerTable = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        UserTable = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         StoLocTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -62,21 +118,94 @@ public class GeneralManagementGui extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(StoLocTable);
 
+        jLabel1.setText("Sto Locs");
+
+        jLabel2.setText("Customers");
+
+        jLabel3.setText("Users");
+
+        jLabel4.setText("Perftrack");
+
+        PerftrackTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(PerftrackTable);
+
+        CustomerTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(CustomerTable);
+
+        UserTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(UserTable);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(83, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -118,7 +247,17 @@ public class GeneralManagementGui extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable CustomerTable;
+    private javax.swing.JTable PerftrackTable;
     private javax.swing.JTable StoLocTable;
+    private javax.swing.JTable UserTable;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     // End of variables declaration//GEN-END:variables
 }

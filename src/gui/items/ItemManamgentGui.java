@@ -4,6 +4,9 @@
  */
 package gui.items;
 
+import javax.swing.table.DefaultTableModel;
+import models.Item;
+
 /**
  *
  * @author gl
@@ -103,11 +106,28 @@ public class ItemManamgentGui extends javax.swing.JFrame {
     private void Btn_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_createActionPerformed
         //Neues Fenster öffnen
         
-        ItemCreate newForm = new ItemCreate();
-        newForm.setVisible(true);
+                                          
+    ItemCreate newForm = new ItemCreate();
+    newForm.setVisible(true);
+
         
+    
+    
     }//GEN-LAST:event_Btn_createActionPerformed
 
+    public void addItemToTable(Item item) {
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.addRow(new Object[]{
+        item.getItemId(),
+        item.getName(),
+        item.getItemLength(),
+        item.getItemWidth(),
+        item.getItemHeight(),
+        item.getPickingStoLoc()
+    });
+}
+
+    
     private void Btn_changeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_changeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_changeActionPerformed

@@ -4,10 +4,14 @@ import gui.items.ItemManamgentGui;
 import gui.loadingunit.LoadingUnitGui;
 import java.util.List;
 import javax.swing.JOptionPane;
+import models.Customer;
 import models.Item;
 import models.Stoloc;
+import models.User;
+import repositories.CustomerRepository;
 import repositories.ItemRepository;
 import repositories.StolocRepository;
+import repositories.UserRepository;
 
 public class DemoApp extends javax.swing.JFrame {
 
@@ -167,6 +171,37 @@ public class DemoApp extends javax.swing.JFrame {
         for (Item item : alleItems) {
             outputString += item.toString() + "\n";
         }
+        
+        
+        //Customers und User anlegen: UserRepository userRepository = new UserRepository();
+        CustomerRepository customerRepository = new CustomerRepository();
+        UserRepository userRepository = new UserRepository();
+        // Erstellen und Hinzufügen von drei Benutzern
+        User user1 = new User("user001");
+        user1.setUserName("Alice");
+        userRepository.addToDatabase(user1);
+
+        User user2 = new User("user002");
+        user2.setUserName("Bob");
+        userRepository.addToDatabase(user2);
+
+        User user3 = new User("user003");
+        user3.setUserName("Charlie");
+        userRepository.addToDatabase(user3);
+
+        // Erstellen und Hinzufügen von drei Kunden
+        Customer customer1 = new Customer("cust001");
+        customer1.setAllowedLuType("TypeA");
+        customerRepository.addToDatabase(customer1);
+
+        Customer customer2 = new Customer("cust002");
+        customer2.setAllowedLuType("TypeB");
+        customerRepository.addToDatabase(customer2);
+
+        Customer customer3 = new Customer("cust003");
+        customer3.setAllowedLuType("TypeC");
+        customerRepository.addToDatabase(customer3);
+        
 
         JOptionPane.showMessageDialog(this, outputString);
 
