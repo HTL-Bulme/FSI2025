@@ -4,7 +4,12 @@
  */
 package gui.items;
 
+import java.awt.event.WindowEvent;
+import java.util.List;
 import models.Item;
+import models.Stoloc;
+import repositories.ItemRepository;
+import repositories.StolocRepository;
 
 /**
  *
@@ -17,6 +22,13 @@ public class ItemCreate extends javax.swing.JFrame {
      */
     public ItemCreate() {
         initComponents();
+        
+        StolocRepository repo = new StolocRepository();
+        List<Stoloc> allObjs = repo.getAll();
+        StolocDropdown.removeAllItems();
+        for (Stoloc obj : allObjs) {
+            StolocDropdown.addItem(obj.getStoLocId());
+        }
     }
 
     /**
@@ -33,7 +45,6 @@ public class ItemCreate extends javax.swing.JFrame {
         FldName = new javax.swing.JTextField();
         FldWidth = new javax.swing.JTextField();
         FldHeight = new javax.swing.JTextField();
-        BtnStoLoc = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -41,7 +52,8 @@ public class ItemCreate extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         BtnFinish = new javax.swing.JButton();
         FldLength = new javax.swing.JTextField();
-        FldStoLoc = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        StolocDropdown = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -71,13 +83,6 @@ public class ItemCreate extends javax.swing.JFrame {
             }
         });
 
-        BtnStoLoc.setText("pickingStoLoc");
-        BtnStoLoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnStoLocActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Id");
 
         jLabel3.setText("Name");
@@ -88,14 +93,16 @@ public class ItemCreate extends javax.swing.JFrame {
 
         jLabel6.setText("Höhe");
 
-        BtnFinish.setText("Überliefern");
+        BtnFinish.setText("Speichern");
         BtnFinish.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnFinishActionPerformed(evt);
             }
         });
 
-        FldStoLoc.setText("StoLoc");
+        jLabel7.setText("StoLoc");
+
+        StolocDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,14 +131,17 @@ public class ItemCreate extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(FLdId, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnStoLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(FldStoLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(StolocDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1))
+                        .addGap(0, 1, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnFinish)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,13 +168,13 @@ public class ItemCreate extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(FldHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(BtnFinish))
-                .addGap(11, 11, 11)
+                    .addComponent(jLabel6))
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnStoLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FldStoLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                    .addComponent(BtnFinish)
+                    .addComponent(jLabel7)
+                    .addComponent(StolocDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -187,52 +197,47 @@ public class ItemCreate extends javax.swing.JFrame {
     }//GEN-LAST:event_FldHeightActionPerformed
 
     private void BtnFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnFinishActionPerformed
-     String id = FLdId.getText().trim();
-    String name = FldName.getText().trim();
-    String lengthText = FldLength.getText().trim();
-    String widthText = FldWidth.getText().trim();
-    String heightText = FldHeight.getText().trim();
-    String stoLoc = FldStoLoc.getText().trim(); // <--- muss im Formular vorhanden sein
+        String id = FLdId.getText().trim();
+        String name = FldName.getText().trim();
+        String lengthText = FldLength.getText().trim();
+        String widthText = FldWidth.getText().trim();
+        String heightText = FldHeight.getText().trim();
+        String stoLoc = StolocDropdown.getSelectedItem().toString();
 
-    // Prüfung: Alle Felder ausgefüllt?
-    if (id.isEmpty() || name.isEmpty() || lengthText.isEmpty() ||
-        widthText.isEmpty() || heightText.isEmpty() || stoLoc.isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "Bitte alle Felder ausfüllen!", "Fehler", javax.swing.JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+        // Prüfung: Alle Felder ausgefüllt?
+        if (id.isEmpty() || name.isEmpty() || lengthText.isEmpty()
+                || widthText.isEmpty() || heightText.isEmpty() || stoLoc.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Bitte alle Felder ausfüllen!", "Fehler", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-    // Prüfung: Länge, Breite, Höhe sind Integer?
-    long length, width, height;
-    try {
-        length = Long.parseLong(lengthText);
-        width = Long.parseLong(widthText);
-        height = Long.parseLong(heightText);
-    } catch (NumberFormatException e) {
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "Länge, Breite und Höhe müssen ganze Zahlen sein!", "Ungültige Eingabe", javax.swing.JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+        // Prüfung: Länge, Breite, Höhe sind Integer?
+        long length, width, height;
+        try {
+            length = Long.parseLong(lengthText);
+            width = Long.parseLong(widthText);
+            height = Long.parseLong(heightText);
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Länge, Breite und Höhe müssen ganze Zahlen sein!", "Ungültige Eingabe", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-    // Objekt erstellen und Werte setzen
-    Item item = new Item(id);
-    item.setName(name);
-    item.setItemLength(length);
-    item.setItemWidth(width);
-    item.setItemHeight(height);
-    item.setPickingStoLoc(stoLoc);
+        // Objekt erstellen und Werte setzen
+        Item item = new Item(id);
+        item.setName(name);
+        item.setItemLength(length);
+        item.setItemWidth(width);
+        item.setItemHeight(height);
+        item.setPickingStoLoc(stoLoc);
 
-    // Beispiel: Ausgabe zur Kontrolle
-    System.out.println("Item erstellt:");
-    System.out.println(item);
+        ItemRepository repo = new ItemRepository();
+        repo.addToDatabase(item);
 
-    // Fenster schließen
-    this.dispose();
+        // Fenster schließen
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }//GEN-LAST:event_BtnFinishActionPerformed
-
-    private void BtnStoLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnStoLocActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnStoLocActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,18 +276,18 @@ public class ItemCreate extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnFinish;
-    private javax.swing.JTextField BtnStoLoc;
     private javax.swing.JTextField FLdId;
     private javax.swing.JTextField FldHeight;
     private javax.swing.JTextField FldLength;
     private javax.swing.JTextField FldName;
-    private javax.swing.JTextField FldStoLoc;
     private javax.swing.JTextField FldWidth;
+    private javax.swing.JComboBox<String> StolocDropdown;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }
