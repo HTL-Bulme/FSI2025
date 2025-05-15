@@ -8,15 +8,35 @@ package gui;
  *
  * @author gl
  */
-public class OutboundOrderManagementGui extends javax.swing.JFrame {
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import models.OutboundOrder;
+
+import repositories.OutboundOrderRepository;
+
+public class OutboundOrderManagementGui extends javax.swing.JFrame {
+    
     /**
      * Creates new form OutboundOrderManagementGui
      */
     public OutboundOrderManagementGui() {
         initComponents();
+        
+        OutboundOrderRepository repository = new OutboundOrderRepository();
+        List<OutboundOrder> allObjs = repository.getAll();
+        
+        SetUpOBOTable(allObjs);
     }
-
+    
+    private void SetUpOBOTable(List<OutboundOrder> allObjs) {
+        String[] columnNames = {"pickingOrderId", "customerId","deliveryTime"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        for (OutboundOrder s : allObjs) {
+            model.addRow(new Object[]{s.getPickingOrder(), s.getCustomerId(), s.getDeliveryTime()});
+        }
+        TblOBO.setModel(model);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,17 +46,39 @@ public class OutboundOrderManagementGui extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TblOBO = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        TblOBO.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(TblOBO);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(55, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -78,5 +120,7 @@ public class OutboundOrderManagementGui extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TblOBO;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

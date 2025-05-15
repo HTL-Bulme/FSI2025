@@ -6,18 +6,19 @@ package gui.loadingunit;
 
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import models.Stoloc;
 import repositories.LoadinguntisRepositor;
 import models.Loadingunit;
+import models.Stoloc;
+import repositories.StolocRepository;
 
 /**
  *
- * @author gl
+ * @author gl //RKU
  */
 public class LoadingUnitGui extends javax.swing.JFrame {
 
     private LoadinguntisRepositor repo =new LoadinguntisRepositor();; 
-    
+    private StolocRepository repoStoLoc =new StolocRepository();; 
     /**
      * Creates new form ItemManamgentGui
      */
@@ -25,10 +26,21 @@ public class LoadingUnitGui extends javax.swing.JFrame {
         initComponents();
         
         loadLusFromDB();
+        fillComboStoLoc();
         
         
     }
     
+    
+    private void fillComboStoLoc(){
+        cmboStoLoc.removeAllItems();
+        List<Stoloc> allStoLocs = repoStoLoc.getAll();
+        
+        for (Stoloc stoLoc : allStoLocs){
+          cmboStoLoc.addItem(stoLoc.getStoLocId());
+        }
+        
+    }
     
     private void loadLusFromDB(){
         List<Loadingunit> allObjs= repo.getAll();
@@ -53,12 +65,12 @@ public class LoadingUnitGui extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         luTable = new javax.swing.JTable();
         textFieldLuId = new javax.swing.JTextField();
-        textFieldSToLoc = new javax.swing.JTextField();
-        textFieldLuType = new javax.swing.JTextField();
         btnAddLu = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        cmboStoLoc = new javax.swing.JComboBox<>();
+        cmbLUType = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Loading Units");
@@ -96,28 +108,38 @@ public class LoadingUnitGui extends javax.swing.JFrame {
 
         jLabel3.setText("LU-Type");
 
+        cmboStoLoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmboStoLoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmboStoLocActionPerformed(evt);
+            }
+        });
+
+        cmbLUType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "EP_90", "EP_150", "EP_190" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnAddLu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(textFieldLuId, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
                         .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(textFieldSToLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmboStoLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textFieldLuType, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnAddLu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(88, Short.MAX_VALUE))
+                        .addComponent(cmbLUType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,10 +148,10 @@ public class LoadingUnitGui extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textFieldLuId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(textFieldSToLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(textFieldLuType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmboStoLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbLUType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAddLu)
                 .addGap(28, 28, 28)
@@ -143,8 +165,8 @@ public class LoadingUnitGui extends javax.swing.JFrame {
     private void btnAddLuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLuActionPerformed
        
         Loadingunit lu = new Loadingunit(textFieldLuId.getText());
-        lu.setLuType(textFieldLuType.getText());
-        lu.setStoLocId(textFieldSToLoc.getText());
+        lu.setLuType(cmbLUType.getSelectedItem().toString());
+        lu.setStoLocId(cmboStoLoc.getSelectedItem().toString());
         repo.addToDatabase(lu);
         loadLusFromDB();
         
@@ -153,6 +175,10 @@ public class LoadingUnitGui extends javax.swing.JFrame {
     private void textFieldLuIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldLuIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldLuIdActionPerformed
+
+    private void cmboStoLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboStoLocActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmboStoLocActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,22 +211,20 @@ public class LoadingUnitGui extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoadingUnitGui().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new LoadingUnitGui().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddLu;
+    private javax.swing.JComboBox<String> cmbLUType;
+    private javax.swing.JComboBox<String> cmboStoLoc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable luTable;
     private javax.swing.JTextField textFieldLuId;
-    private javax.swing.JTextField textFieldLuType;
-    private javax.swing.JTextField textFieldSToLoc;
     // End of variables declaration//GEN-END:variables
 }

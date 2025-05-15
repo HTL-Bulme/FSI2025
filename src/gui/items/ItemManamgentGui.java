@@ -22,7 +22,7 @@ public class ItemManamgentGui extends javax.swing.JFrame {
     /**
      * Creates new form ItemManamgentGui
      */
-    public ItemManamgentGui() {
+    public ItemManamgentGui() { //test
         initComponents();
     }
 
