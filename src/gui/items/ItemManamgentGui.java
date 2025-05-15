@@ -8,6 +8,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import models.Item;
 import models.Stoloc;
 import repositories.ItemRepository;
@@ -117,15 +118,15 @@ public class ItemManamgentGui extends javax.swing.JFrame {
         //Neues Fenster öffnen
 
         ItemCreate newForm = new ItemCreate();
-        
-        	newForm.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent event) {
-				System.out.println("Received Window Closing Event");
-                                reload();
-			}
-		});
-        
+
+        newForm.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent event) {
+                System.out.println("Received Window Closing Event");
+                reload();
+            }
+        });
+
         newForm.setVisible(true);
 
     }//GEN-LAST:event_Btn_createActionPerformed
@@ -148,7 +149,13 @@ public class ItemManamgentGui extends javax.swing.JFrame {
     }//GEN-LAST:event_Btn_changeActionPerformed
 
     private void Btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_deleteActionPerformed
+        int selected = ItemTable.getSelectedRow();
+        if (selected >= 0) {
+            TableModel model = ItemTable.getModel();
 
+            System.out.println("TODO: Delte: " + model.getValueAt(selected, 0));
+
+        }
 
     }//GEN-LAST:event_Btn_deleteActionPerformed
 
