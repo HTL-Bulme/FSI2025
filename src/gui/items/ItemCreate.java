@@ -5,8 +5,11 @@
 package gui.items;
 
 import java.awt.event.WindowEvent;
+import java.util.List;
 import models.Item;
+import models.Stoloc;
 import repositories.ItemRepository;
+import repositories.StolocRepository;
 
 /**
  *
@@ -19,6 +22,13 @@ public class ItemCreate extends javax.swing.JFrame {
      */
     public ItemCreate() {
         initComponents();
+        
+        StolocRepository repo = new StolocRepository();
+        List<Stoloc> allObjs = repo.getAll();
+        StolocDropdown.removeAllItems();
+        for (Stoloc obj : allObjs) {
+            StolocDropdown.addItem(obj.getStoLocId());
+        }
     }
 
     /**
@@ -42,8 +52,8 @@ public class ItemCreate extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         BtnFinish = new javax.swing.JButton();
         FldLength = new javax.swing.JTextField();
-        FldStoLoc = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        StolocDropdown = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -90,9 +100,9 @@ public class ItemCreate extends javax.swing.JFrame {
             }
         });
 
-        FldStoLoc.setText("StoLoc");
-
         jLabel7.setText("StoLoc");
+
+        StolocDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,7 +121,7 @@ public class ItemCreate extends javax.swing.JFrame {
                         .addComponent(FldHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(FldLength, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -121,11 +131,14 @@ public class ItemCreate extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(FLdId, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(FldStoLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(StolocDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1))
+                        .addGap(0, 1, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnFinish)
                 .addContainerGap(24, Short.MAX_VALUE))
@@ -158,10 +171,10 @@ public class ItemCreate extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(FldStoLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnFinish)
-                    .addComponent(jLabel7))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(jLabel7)
+                    .addComponent(StolocDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -189,7 +202,7 @@ public class ItemCreate extends javax.swing.JFrame {
         String lengthText = FldLength.getText().trim();
         String widthText = FldWidth.getText().trim();
         String heightText = FldHeight.getText().trim();
-        String stoLoc = FldStoLoc.getText().trim(); // <--- muss im Formular vorhanden sein
+        String stoLoc = StolocDropdown.getSelectedItem().toString();
 
         // Prüfung: Alle Felder ausgefüllt?
         if (id.isEmpty() || name.isEmpty() || lengthText.isEmpty()
@@ -267,8 +280,8 @@ public class ItemCreate extends javax.swing.JFrame {
     private javax.swing.JTextField FldHeight;
     private javax.swing.JTextField FldLength;
     private javax.swing.JTextField FldName;
-    private javax.swing.JTextField FldStoLoc;
     private javax.swing.JTextField FldWidth;
+    private javax.swing.JComboBox<String> StolocDropdown;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
