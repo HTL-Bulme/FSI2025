@@ -4,6 +4,7 @@
  */
 package gui.items;
 
+import java.awt.event.WindowEvent;
 import models.Item;
 import repositories.ItemRepository;
 
@@ -110,7 +111,7 @@ public class ItemCreate extends javax.swing.JFrame {
                         .addComponent(FldHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                         .addComponent(FldLength, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -127,7 +128,7 @@ public class ItemCreate extends javax.swing.JFrame {
                         .addComponent(FldStoLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnFinish)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,48 +184,46 @@ public class ItemCreate extends javax.swing.JFrame {
     }//GEN-LAST:event_FldHeightActionPerformed
 
     private void BtnFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnFinishActionPerformed
-     String id = FLdId.getText().trim();
-    String name = FldName.getText().trim();
-    String lengthText = FldLength.getText().trim();
-    String widthText = FldWidth.getText().trim();
-    String heightText = FldHeight.getText().trim();
-    String stoLoc = FldStoLoc.getText().trim(); // <--- muss im Formular vorhanden sein
+        String id = FLdId.getText().trim();
+        String name = FldName.getText().trim();
+        String lengthText = FldLength.getText().trim();
+        String widthText = FldWidth.getText().trim();
+        String heightText = FldHeight.getText().trim();
+        String stoLoc = FldStoLoc.getText().trim(); // <--- muss im Formular vorhanden sein
 
-    // Prüfung: Alle Felder ausgefüllt?
-    if (id.isEmpty() || name.isEmpty() || lengthText.isEmpty() ||
-        widthText.isEmpty() || heightText.isEmpty() || stoLoc.isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "Bitte alle Felder ausfüllen!", "Fehler", javax.swing.JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+        // Prüfung: Alle Felder ausgefüllt?
+        if (id.isEmpty() || name.isEmpty() || lengthText.isEmpty()
+                || widthText.isEmpty() || heightText.isEmpty() || stoLoc.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Bitte alle Felder ausfüllen!", "Fehler", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-    // Prüfung: Länge, Breite, Höhe sind Integer?
-    long length, width, height;
-    try {
-        length = Long.parseLong(lengthText);
-        width = Long.parseLong(widthText);
-        height = Long.parseLong(heightText);
-    } catch (NumberFormatException e) {
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "Länge, Breite und Höhe müssen ganze Zahlen sein!", "Ungültige Eingabe", javax.swing.JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+        // Prüfung: Länge, Breite, Höhe sind Integer?
+        long length, width, height;
+        try {
+            length = Long.parseLong(lengthText);
+            width = Long.parseLong(widthText);
+            height = Long.parseLong(heightText);
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Länge, Breite und Höhe müssen ganze Zahlen sein!", "Ungültige Eingabe", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-    // Objekt erstellen und Werte setzen
-    Item item = new Item(id);
-    item.setName(name);
-    item.setItemLength(length);
-    item.setItemWidth(width);
-    item.setItemHeight(height);
-    item.setPickingStoLoc(stoLoc);
+        // Objekt erstellen und Werte setzen
+        Item item = new Item(id);
+        item.setName(name);
+        item.setItemLength(length);
+        item.setItemWidth(width);
+        item.setItemHeight(height);
+        item.setPickingStoLoc(stoLoc);
 
-    
         ItemRepository repo = new ItemRepository();
         repo.addToDatabase(item);
-    
 
-    // Fenster schließen
-    this.dispose();
+        // Fenster schließen
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }//GEN-LAST:event_BtnFinishActionPerformed
 
     /**
