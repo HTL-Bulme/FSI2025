@@ -36,16 +36,15 @@ public class PickingorderGui extends javax.swing.JFrame {
     
     
     private void loadLusFromDB(){
-        /**
-        List<Loadingunit> allObjs= repo.getAll();
-        String[] columnNames = {"luId", "stoLocId", "luType"};
+        
+        List<PickingOrder> allObjs= pickingOrderRepo.getAll();
+        String[] columnNames = {"currentUser", "pickingOrderId", "startTime","finishTime","customerId","deliveryTime"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
-        for (Loadingunit lu : allObjs) {
-            model.addRow(new Object[]{lu.getLuId(), lu.getStoLocId(), lu.getluType()});
+        for (PickingOrder lu : allObjs) {
+            model.addRow(new Object[]{lu.getCurrentUser(), lu.getPickingOrderId(),lu.getStartTime(),lu.getFinishTime(),lu.getCustomerId(),lu.getDeliveryTime()});
         }        
         luTable.setModel(model);
-        */
     }
 
     /**
