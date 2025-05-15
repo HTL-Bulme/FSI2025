@@ -4,8 +4,10 @@
  */
 package gui.items;
 
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import models.Item;
+import repositories.ItemRepository;
 
 /**
  *
@@ -36,6 +38,11 @@ public class ItemManamgentGui extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                Opened(evt);
+            }
+        });
 
         Btn_create.setText("Erstellen");
         Btn_create.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +143,13 @@ public class ItemManamgentGui extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_Btn_deleteActionPerformed
+
+    private void Opened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_Opened
+    ItemRepository repo = new ItemRepository();
+    List<Item> allItems = repo.getAll();
+    
+        
+    }//GEN-LAST:event_Opened
 
     /**
      * @param args the command line arguments

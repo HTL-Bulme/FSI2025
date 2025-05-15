@@ -5,6 +5,7 @@
 package gui.items;
 
 import models.Item;
+import repositories.ItemRepository;
 
 /**
  *
@@ -33,7 +34,6 @@ public class ItemCreate extends javax.swing.JFrame {
         FldName = new javax.swing.JTextField();
         FldWidth = new javax.swing.JTextField();
         FldHeight = new javax.swing.JTextField();
-        BtnStoLoc = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -42,6 +42,7 @@ public class ItemCreate extends javax.swing.JFrame {
         BtnFinish = new javax.swing.JButton();
         FldLength = new javax.swing.JTextField();
         FldStoLoc = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -71,13 +72,6 @@ public class ItemCreate extends javax.swing.JFrame {
             }
         });
 
-        BtnStoLoc.setText("pickingStoLoc");
-        BtnStoLoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnStoLocActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Id");
 
         jLabel3.setText("Name");
@@ -88,7 +82,7 @@ public class ItemCreate extends javax.swing.JFrame {
 
         jLabel6.setText("Höhe");
 
-        BtnFinish.setText("Überliefern");
+        BtnFinish.setText("Speichern");
         BtnFinish.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnFinishActionPerformed(evt);
@@ -96,6 +90,8 @@ public class ItemCreate extends javax.swing.JFrame {
         });
 
         FldStoLoc.setText("StoLoc");
+
+        jLabel7.setText("StoLoc");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,12 +122,12 @@ public class ItemCreate extends javax.swing.JFrame {
                         .addComponent(FLdId, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnStoLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(FldStoLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnFinish)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,13 +154,13 @@ public class ItemCreate extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(FldHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(BtnFinish))
-                .addGap(11, 11, 11)
+                    .addComponent(jLabel6))
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnStoLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FldStoLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                    .addComponent(FldStoLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnFinish)
+                    .addComponent(jLabel7))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -222,17 +218,14 @@ public class ItemCreate extends javax.swing.JFrame {
     item.setItemHeight(height);
     item.setPickingStoLoc(stoLoc);
 
-    // Beispiel: Ausgabe zur Kontrolle
-    System.out.println("Item erstellt:");
-    System.out.println(item);
+    
+        ItemRepository repo = new ItemRepository();
+        repo.addToDatabase(item);
+    
 
     // Fenster schließen
     this.dispose();
     }//GEN-LAST:event_BtnFinishActionPerformed
-
-    private void BtnStoLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnStoLocActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnStoLocActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,7 +264,6 @@ public class ItemCreate extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnFinish;
-    private javax.swing.JTextField BtnStoLoc;
     private javax.swing.JTextField FLdId;
     private javax.swing.JTextField FldHeight;
     private javax.swing.JTextField FldLength;
@@ -284,5 +276,6 @@ public class ItemCreate extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }
