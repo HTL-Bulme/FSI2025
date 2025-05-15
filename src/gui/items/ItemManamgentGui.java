@@ -4,8 +4,14 @@
  */
 package gui.items;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import models.Item;
+import models.Stoloc;
+import repositories.ItemRepository;
 
 /**
  *
@@ -16,7 +22,7 @@ public class ItemManamgentGui extends javax.swing.JFrame {
     /**
      * Creates new form ItemManamgentGui
      */
-    public ItemManamgentGui() {
+    public ItemManamgentGui() { //test
         initComponents();
     }
 
@@ -33,9 +39,14 @@ public class ItemManamgentGui extends javax.swing.JFrame {
         Btn_change = new javax.swing.JButton();
         Btn_delete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        ItemTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                Opened(evt);
+            }
+        });
 
         Btn_create.setText("Erstellen");
         Btn_create.addActionListener(new java.awt.event.ActionListener() {
@@ -58,7 +69,7 @@ public class ItemManamgentGui extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        ItemTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -69,7 +80,7 @@ public class ItemManamgentGui extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(ItemTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,37 +116,68 @@ public class ItemManamgentGui extends javax.swing.JFrame {
 
     private void Btn_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_createActionPerformed
         //Neues Fenster öffnen
-        
-                                          
-    ItemCreate newForm = new ItemCreate();
-    newForm.setVisible(true);
 
-        
-    
-    
+        ItemCreate newForm = new ItemCreate();
+
+        newForm.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent event) {
+                System.out.println("Received Window Closing Event");
+                reload();
+            }
+        });
+
+        newForm.setVisible(true);
+
     }//GEN-LAST:event_Btn_createActionPerformed
 
     public void addItemToTable(Item item) {
-    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-    model.addRow(new Object[]{
-        item.getItemId(),
-        item.getName(),
-        item.getItemLength(),
-        item.getItemWidth(),
-        item.getItemHeight(),
-        item.getPickingStoLoc()
-    });
-}
+        DefaultTableModel model = (DefaultTableModel) ItemTable.getModel();
+        model.addRow(new Object[]{
+            item.getItemId(),
+            item.getName(),
+            item.getItemLength(),
+            item.getItemWidth(),
+            item.getItemHeight(),
+            item.getPickingStoLoc()
+        });
+    }
 
-    
+
     private void Btn_changeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_changeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_changeActionPerformed
 
     private void Btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_deleteActionPerformed
-        
-        
+        int selected = ItemTable.getSelectedRow();
+        if (selected >= 0) {
+            TableModel model = ItemTable.getModel();
+
+            System.out.println("TODO: Delte: " + model.getValueAt(selected, 0));
+
+        }
+
     }//GEN-LAST:event_Btn_deleteActionPerformed
+
+    private void Opened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_Opened
+
+        reload();
+    }//GEN-LAST:event_Opened
+
+    private void reload() {
+        ItemRepository repo = new ItemRepository();
+        List<Item> allItems = repo.getAll();
+        SetupTable(allItems);
+    }
+
+    private void SetupTable(List<Item> allObjs) {
+        String[] columnNames = {"itemId", "name"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        for (Item i : allObjs) {
+            model.addRow(new Object[]{i.getItemId(), i.getName()});
+        }
+        ItemTable.setModel(model);
+    }
 
     /**
      * @param args the command line arguments
@@ -176,7 +218,7 @@ public class ItemManamgentGui extends javax.swing.JFrame {
     private javax.swing.JButton Btn_change;
     private javax.swing.JButton Btn_create;
     private javax.swing.JButton Btn_delete;
+    private javax.swing.JTable ItemTable;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
