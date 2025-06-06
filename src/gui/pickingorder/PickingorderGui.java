@@ -5,6 +5,7 @@
 package gui.pickingorder;
 
 import gui.pickingorder.PickingorderGui.*;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import models.PickingOrder;
@@ -12,6 +13,7 @@ import models.OutboundOrder;
 import repositories.PickingOrderRepository;
 import repositories.OutboundOrderRepository;
 import models.Loadingunit;
+import models.PickingOrderStatus;
 
 /**
  *
@@ -29,9 +31,7 @@ public class PickingorderGui extends javax.swing.JFrame {
     public PickingorderGui() {
         initComponents();
         
-        loadLusFromDB();
-        
-        
+        loadLusFromDB();     
     }
     
     
@@ -59,7 +59,7 @@ public class PickingorderGui extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         luTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnCheckOutboundorders = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Loading Units");
@@ -78,7 +78,13 @@ public class PickingorderGui extends javax.swing.JFrame {
         luTable.setName("luTable"); // NOI18N
         jScrollPane1.setViewportView(luTable);
 
-        jButton1.setText("Kommissionerauftrag anlegen/prüfen");
+        btnCheckOutboundorders.setText("Kommissionerauftrag anlegen/prüfen");
+        btnCheckOutboundorders.setName("btnCheckOutboundorders"); // NOI18N
+        btnCheckOutboundorders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckOutboundordersActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,14 +94,14 @@ public class PickingorderGui extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCheckOutboundorders, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCheckOutboundorders, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(163, Short.MAX_VALUE))
@@ -103,6 +109,32 @@ public class PickingorderGui extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCheckOutboundordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckOutboundordersActionPerformed
+        // Check if Outboundordes with state "Neu" -> for each create new pickingorder
+        List<OutboundOrder> outboundorders = outboundOrderRepo.getAll();
+        
+        for(int i = 0; i < outboundorders.size(); i++){
+            if(outboundorders.get(i).getState() == "Neu")
+            {
+                PickingOrder newPickingorder = new PickingOrder();
+                OutboundOrder aktOutboundorder = outboundorders.get(i);
+                
+                //Übergabe der Eigenschaften von der Outboundorder an die neue Pickingorder
+                newPickingorder.setStatus(PickingOrderStatus.NEU);
+                newPickingorder.setPickingOrderId(aktOutboundorder.getPickingOrder());
+                newPickingorder.setCustomerId(aktOutboundorder.getCustomerId());
+                newPickingorder.setDeliveryTime(aktOutboundorder.getDeliveryTime());
+                
+                pickingOrderRepo.addToDatabase(newPickingorder);
+                
+                
+                
+                
+                aktOutboundorder.setState("Fertig");
+            }
+        }
+    }//GEN-LAST:event_btnCheckOutboundordersActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,7 +179,7 @@ public class PickingorderGui extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCheckOutboundorders;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable luTable;
     // End of variables declaration//GEN-END:variables
