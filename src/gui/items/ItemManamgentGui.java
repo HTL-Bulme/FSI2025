@@ -22,7 +22,7 @@ public class ItemManamgentGui extends javax.swing.JFrame {
     /**
      * Creates new form ItemManamgentGui
      */
-    public ItemManamgentGui() {
+    public ItemManamgentGui() { //test
         initComponents();
     }
 
@@ -153,7 +153,7 @@ public class ItemManamgentGui extends javax.swing.JFrame {
         if (selected >= 0) {
             TableModel model = ItemTable.getModel();
 
-            System.out.println("TODO: Delte: " + model.getValueAt(selected, 0));
+            System.out.println("TODO: Delete: " + model.getValueAt(selected, 0));
 
         }
 
