@@ -9,8 +9,11 @@ package gui;
  * @author gl
  */
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import jdk.jfr.internal.Repository;
 import models.OutboundOrder;
 
 import repositories.OutboundOrderRepository;
@@ -20,20 +23,18 @@ public class OutboundOrderManagementGui extends javax.swing.JFrame {
     /**
      * Creates new form OutboundOrderManagementGui
      */
+    private OutboundOrderRepository repository = new OutboundOrderRepository();
     public OutboundOrderManagementGui() {
         initComponents();
-        
-        OutboundOrderRepository repository = new OutboundOrderRepository();
-        List<OutboundOrder> allObjs = repository.getAll();
-        
-        SetUpOBOTable(allObjs);
+        SetUpOBOTable();
     }
     
-    private void SetUpOBOTable(List<OutboundOrder> allObjs) {
-        String[] columnNames = {"pickingOrderId", "customerId","deliveryTime"};
+    private void SetUpOBOTable() {
+        List<OutboundOrder> allObjs = repository.getAll();
+        String[] columnNames = {"POId", "customerId","state","deliveryTime"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
         for (OutboundOrder s : allObjs) {
-            model.addRow(new Object[]{s.getPickingOrder(), s.getCustomerId(), s.getDeliveryTime()});
+            model.addRow(new Object[]{s.getPickingOrder(), s.getCustomerId(),s.getState(), s.getDeliveryTime()});
         }
         TblOBO.setModel(model);
     }
@@ -48,6 +49,7 @@ public class OutboundOrderManagementGui extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         TblOBO = new javax.swing.JTable();
+        BtnGenObo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -64,25 +66,51 @@ public class OutboundOrderManagementGui extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TblOBO);
 
+        BtnGenObo.setText("Generate Outbound Order");
+        BtnGenObo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGenOboActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(BtnGenObo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(55, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addGap(19, 19, 19)
+                .addComponent(BtnGenObo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnGenOboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGenOboActionPerformed
+        OutboundOrderRepository OboRepo = new OutboundOrderRepository();
+        OutboundOrder Obo1 = new OutboundOrder("01");
+        Obo1.setPickingOrder(1);
+        Obo1.setState("NEU");
+        Obo1.setCustomerId("cust001");
+        Obo1.setDeliveryTime(Timestamp.valueOf("2025-08-14 10:30:00"));
+        //Obo1.setDeliveryTime(Timestamp.from(Instant.now().plus(100,)));
+        OboRepo.addToDatabase(Obo1);
+        SetUpOBOTable();
+    }//GEN-LAST:event_BtnGenOboActionPerformed
 
     /**
      * @param args the command line arguments
@@ -120,6 +148,7 @@ public class OutboundOrderManagementGui extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnGenObo;
     private javax.swing.JTable TblOBO;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

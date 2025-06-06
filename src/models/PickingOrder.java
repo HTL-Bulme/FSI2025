@@ -1,22 +1,19 @@
 package models;
 
 import java.sql.Timestamp;
-        
+  
+
+
 public class PickingOrder {
 
   private long pickingOrderId;
-  private enum status {
-      NEU,
-      AKTIV,
-      KOMM,
-      FERTIG
-  }
+  
   private Timestamp startTime;
   private Timestamp finishTime;
   private String currentUser;
   private String customerId;
   private Timestamp deliveryTime;
-
+  private PickingOrderStatus status;
     /**
      * @return the pickingOrderId
      */
@@ -29,6 +26,7 @@ public class PickingOrder {
      */
     public void setPickingOrderId(long pickingOrderId) {
         this.pickingOrderId = pickingOrderId;
+        
     }
 
     /**
@@ -99,5 +97,13 @@ public class PickingOrder {
      */
     public void setDeliveryTime(Timestamp deliveryTime) {
         this.deliveryTime = deliveryTime;
+    }
+    
+    public void setStatus(PickingOrderStatus status){
+        this.status = status;
+    }
+    
+    public PickingOrderStatus getStatus(){
+        return this.status;
     }
 }
