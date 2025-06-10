@@ -9,6 +9,7 @@ package gui;
  * @author gl
  */
 
+import gui.outboundorder.OutboundOrderGenGui;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
@@ -101,8 +102,9 @@ public class OutboundOrderManagementGui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnGenOboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGenOboActionPerformed
+        /*
         OutboundOrderRepository OboRepo = new OutboundOrderRepository();
-        OutboundOrder Obo1 = new OutboundOrder("01");
+        OutboundOrder Obo1 = new OutboundOrder("1");
         Obo1.setPickingOrder(1);
         Obo1.setState("NEU");
         Obo1.setCustomerId("cust001");
@@ -110,6 +112,10 @@ public class OutboundOrderManagementGui extends javax.swing.JFrame {
         //Obo1.setDeliveryTime(Timestamp.from(Instant.now().plus(100,)));
         OboRepo.addToDatabase(Obo1);
         SetUpOBOTable();
+        */
+        
+        OutboundOrderGenGui newForm = new OutboundOrderGenGui();
+        newForm.setVisible(true);
     }//GEN-LAST:event_BtnGenOboActionPerformed
 
     /**
