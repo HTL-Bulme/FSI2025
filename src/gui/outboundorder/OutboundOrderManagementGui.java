@@ -51,6 +51,7 @@ public class OutboundOrderManagementGui extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TblOBO = new javax.swing.JTable();
         BtnGenObo = new javax.swing.JButton();
+        btnUpdateObo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -74,25 +75,35 @@ public class OutboundOrderManagementGui extends javax.swing.JFrame {
             }
         });
 
+        btnUpdateObo.setText("Update Outbound Orders");
+        btnUpdateObo.setToolTipText("");
+        btnUpdateObo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateOboActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(BtnGenObo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(BtnGenObo)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUpdateObo))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(BtnGenObo)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnGenObo)
+                    .addComponent(btnUpdateObo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
@@ -102,21 +113,13 @@ public class OutboundOrderManagementGui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnGenOboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGenOboActionPerformed
-        /*
-        OutboundOrderRepository OboRepo = new OutboundOrderRepository();
-        OutboundOrder Obo1 = new OutboundOrder("1");
-        Obo1.setPickingOrder(1);
-        Obo1.setState("NEU");
-        Obo1.setCustomerId("cust001");
-        Obo1.setDeliveryTime(Timestamp.valueOf("2025-08-14 10:30:00"));
-        //Obo1.setDeliveryTime(Timestamp.from(Instant.now().plus(100,)));
-        OboRepo.addToDatabase(Obo1);
-        SetUpOBOTable();
-        */
-        
         OutboundOrderGenGui newForm = new OutboundOrderGenGui();
         newForm.setVisible(true);
     }//GEN-LAST:event_BtnGenOboActionPerformed
+
+    private void btnUpdateOboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateOboActionPerformed
+        SetUpOBOTable();
+    }//GEN-LAST:event_btnUpdateOboActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,6 +159,7 @@ public class OutboundOrderManagementGui extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnGenObo;
     private javax.swing.JTable TblOBO;
+    private javax.swing.JButton btnUpdateObo;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
