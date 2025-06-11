@@ -11,6 +11,7 @@ import java.time.Instant;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
+import java.util.HashSet;
 import java.util.List;
 import models.Customer;
 import models.OutboundOrder;
@@ -40,7 +41,7 @@ public class OutboundOrderGenGui extends javax.swing.JFrame {
 
     private void fillComboBoxes(){
         ComboCustId.removeAllItems();       // Löscht items der Comboboxen
-        ComboPickingOrder.removeAllItems();
+       // ComboPickingOrder.removeAllItems();
         
         List<Customer> allCustomer = repoCustomer.getAll();
         List<PickingOrder> allPickingOrder = repoPickingOrder.getAll();
@@ -49,9 +50,9 @@ public class OutboundOrderGenGui extends javax.swing.JFrame {
             ComboCustId.addItem(customerId.getCustomerId());
         }
         
-        for(PickingOrder pickingOrderId : allPickingOrder){
-            ComboPickingOrder.addItem(Long.toString(pickingOrderId.getPickingOrderId()));
-        }
+       // for(PickingOrder pickingOrderId : allPickingOrder){
+        //    ComboPickingOrder.addItem(Long.toString(pickingOrderId.getPickingOrderId()));
+       // }
         
     }
     
@@ -75,7 +76,7 @@ public class OutboundOrderGenGui extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtOrderId = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        ComboPickingOrder = new javax.swing.JComboBox<>();
+        txtPickingOrderId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,7 +122,11 @@ public class OutboundOrderGenGui extends javax.swing.JFrame {
 
         jLabel6.setText("PickingOrderId");
 
-        ComboPickingOrder.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtPickingOrderId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPickingOrderIdActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,23 +135,20 @@ public class OutboundOrderGenGui extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(genObo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel2)
-                                                .addComponent(jLabel3))
-                                            .addGap(8, 8, 8))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel5)
-                                            .addGap(40, 40, 40)))
-                                    .addGap(22, 22, 22))
+                                    .addGap(7, 7, 7)
+                                    .addComponent(jLabel2)
+                                    .addGap(65, 65, 65))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(ComboState, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -154,14 +156,10 @@ public class OutboundOrderGenGui extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel4)))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel6)
-                            .addGap(18, 18, 18)
-                            .addComponent(ComboPickingOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(153, Short.MAX_VALUE))
+                                    .addComponent(jLabel4))
+                                .addComponent(txtPickingOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(203, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,11 +168,11 @@ public class OutboundOrderGenGui extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(ComboPickingOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                    .addComponent(txtPickingOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(ComboCustId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -201,9 +199,14 @@ public class OutboundOrderGenGui extends javax.swing.JFrame {
 
     private void genOboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genOboActionPerformed
         // TODO add your handling code here:
-        
+        List<OutboundOrder> allObo = repoObo.getAll();
+        for(OutboundOrder ObO : allObo){
+         if(Long.valueOf(txtPickingOrderId.getText()) == ObO.getPickingOrder()){
+            javax.swing.JOptionPane.showMessageDialog(this,"PickingOrderId bereits in verwendung", "Fehler", javax.swing.JOptionPane.ERROR_MESSAGE); 
+         }
+        }
         OutboundOrder obo = new OutboundOrder(txtOrderId.getText());
-        obo.setPickingOrder((long) ComboPickingOrder.getSelectedItem()); 
+        obo.setPickingOrder((long) Long.valueOf(txtPickingOrderId.getText())); 
         obo.setCustomerId(ComboCustId.getSelectedItem().toString());
         obo.setState(ComboState.getSelectedItem().toString());
         obo.setDeliveryTime(Timestamp.from(Instant.now(Clock.systemUTC()).plus(Period.ofDays(Integer.parseInt(txtTime.getText())))));
@@ -217,6 +220,10 @@ public class OutboundOrderGenGui extends javax.swing.JFrame {
     private void txtOrderIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrderIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtOrderIdActionPerformed
+
+    private void txtPickingOrderIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPickingOrderIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPickingOrderIdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -255,7 +262,6 @@ public class OutboundOrderGenGui extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboCustId;
-    private javax.swing.JComboBox<String> ComboPickingOrder;
     private javax.swing.JComboBox<String> ComboState;
     private javax.swing.JButton genObo;
     private javax.swing.JLabel jLabel1;
@@ -265,6 +271,7 @@ public class OutboundOrderGenGui extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField txtOrderId;
+    private javax.swing.JTextField txtPickingOrderId;
     private javax.swing.JTextField txtTime;
     // End of variables declaration//GEN-END:variables
 }
