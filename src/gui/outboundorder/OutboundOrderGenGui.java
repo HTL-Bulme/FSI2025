@@ -122,6 +122,7 @@ public class OutboundOrderGenGui extends javax.swing.JFrame {
 
         jLabel6.setText("PickingOrderId");
 
+        txtPickingOrderId.setText("123");
         txtPickingOrderId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPickingOrderIdActionPerformed(evt);
@@ -203,6 +204,9 @@ public class OutboundOrderGenGui extends javax.swing.JFrame {
         for(OutboundOrder ObO : allObo){
          if(Long.valueOf(txtPickingOrderId.getText()) == ObO.getPickingOrder()){
             javax.swing.JOptionPane.showMessageDialog(this,"PickingOrderId bereits in verwendung", "Fehler", javax.swing.JOptionPane.ERROR_MESSAGE); 
+         }
+         if(txtOrderId.getText().equals(ObO.getOrderId())){
+            javax.swing.JOptionPane.showMessageDialog(this,"OrderId bereits in verwendung", "Fehler", javax.swing.JOptionPane.ERROR_MESSAGE); 
          }
         }
         OutboundOrder obo = new OutboundOrder(txtOrderId.getText());
