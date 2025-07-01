@@ -36,7 +36,6 @@ public class PickingOrderRepository {
                 line.setPickingOrderId(rs.getLong("pickingOrderId"));
                 line.setStartTime(rs.getTimestamp("startTime"));
                 line.setFinishTime(rs.getTimestamp("finishTime"));
-                line.setCurrentUser(rs.getString("currentUser"));
                 line.setCustomerId(rs.getString("customerId"));
                 line.setDeliveryTime(rs.getTimestamp("deliveryTime"));
                 list.add(line);
